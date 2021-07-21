@@ -24,3 +24,18 @@
 'use strict';
 
 let numberOfFilms = prompt('Сколько фильмов вы уже посмотрели?', '12');
+
+let personalMovieDB = {
+    count: numberOfFilms,
+    movies: {
+
+    },
+    actors: {
+
+    },
+    genres: [
+
+    ],
+    privat: false
+};
+
