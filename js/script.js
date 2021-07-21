@@ -39,3 +39,10 @@ let personalMovieDB = {
     privat: false
 };
 
+let lastFilm = prompt('Один из последних просмотренных фильмов?', 'logan');
+let lastFilmRating = prompt('На сколько оцените его?', '8.1');
+
+personalMovieDB.movies.name =  lastFilm;
+personalMovieDB.movies.rating =  lastFilmRating;
+
+console.log(personalMovieDB.movies);
