@@ -23,7 +23,7 @@
 
 'use strict';
 
-let numberOfFilms = prompt('Сколько фильмов вы уже посмотрели?', '12');
+const numberOfFilms = prompt('Сколько фильмов вы уже посмотрели?', '12');
 
 let personalMovieDB = {
     count: numberOfFilms,
@@ -39,8 +39,8 @@ let personalMovieDB = {
     privat: false
 };
 
-let lastFilm = prompt('Один из последних просмотренных фильмов?', 'logan');
-let lastFilmRating = prompt('На сколько оцените его?', '8.1');
+const lastFilm = prompt('Один из последних просмотренных фильмов?', 'logan');
+const lastFilmRating = +prompt('На сколько оцените его?', '8.1');
 
 personalMovieDB.movies.name =  lastFilm;
 personalMovieDB.movies.rating =  lastFilmRating;
