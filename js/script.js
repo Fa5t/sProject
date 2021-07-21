@@ -42,7 +42,6 @@ let personalMovieDB = {
 const lastFilm = prompt('Один из последних просмотренных фильмов?', 'logan');
 const lastFilmRating = +prompt('На сколько оцените его?', '8.1');
 
-personalMovieDB.movies.name =  lastFilm;
-personalMovieDB.movies.rating =  lastFilmRating;
+personalMovieDB.movies[lastFilm] =  lastFilmRating;
 
 console.log(personalMovieDB.movies);
