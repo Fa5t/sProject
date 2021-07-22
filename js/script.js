@@ -82,7 +82,16 @@ const personalMovieDB = {
             
     
         }
+    },
+
+    toggleVisibleMyDB: () => {
+        if(personalMovieDB.privat) {
+            personalMovieDB.privat = false;
+        } else {
+            personalMovieDB.privat = true;
+        }
     }
 };
 
+personalMovieDB.toggleVisibleMyDB(personalMovieDB.privat);
 console.log(personalMovieDB);
