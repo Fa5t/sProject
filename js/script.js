@@ -74,7 +74,7 @@ const personalMovieDB = {
     writeYourGenres: () => {
         for (let i = 0; i < 3; i++) {
             let favGenre = prompt(`Ваш любимый жанр под номером ${i+1}`, '');
-            if (favGenre === null && favGenre === '' && favGenre.length > 50) {
+            if (favGenre === null || favGenre === '' || favGenre.length > 50) {
                 i--;
             } else {
                 personalMovieDB.genres[i] = favGenre;
