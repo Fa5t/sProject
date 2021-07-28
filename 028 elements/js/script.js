@@ -15,60 +15,110 @@ P.S. Здесь есть несколько вариантов решения з
 
 5) Фильмы должны быть отсортированы по алфавиту */
 
-'use strict';
-
 // Возьмите свой код из предыдущей практики
 
 'use strict';
 
-const movieDB = {
-    movies: [
-        "Логан",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Одержимость",
-        "Скотт Пилигрим против..."
-    ]
-};
+document.addEventListener('DOMContentLoaded', () => {
+    const movieDB = {
+        movies: [
+            "Логан",
+            "Лига справедливости",
+            "Ла-ла лэнд",
+            "Одержимость",
+            "Скотт Пилигрим против..."
+        ]
+    };
+    
+    const promoAdv = document.querySelector('.promo__adv'),
+        imgPromoAdv = promoAdv.querySelectorAll('img'),
+        promoBG = document.querySelector('.promo__bg'),
+        promoGenre = promoBG.querySelector('.promo__genre'),
+        //interactiveItem = document.querySelectorAll('.promo__interactive-item'),
+        promoList = document.querySelector('.promo__interactive-list'),
+        delFilm = document.querySelectorAll('.delete'),
+        addFilmForm = document.querySelector('form.add'),
+        addingInput = addFilmForm.querySelector('.adding__input'),
+        favFilm = addFilmForm.querySelector('[type="checkbox"]');
+    
+    const removeNode = (node) => {
+        node.forEach(item => {
+            item.remove();
+        });
+    }
+    removeNode(imgPromoAdv);
+    
+    const changeText = (node) => {
+        const text = 'драма';
+        node.textContent = text;
 
-const promoAdv = document.querySelector('.promo__adv'),
-    imgPromoAdv = promoAdv.querySelectorAll('img'),
-    promoBG = document.querySelector('.promo__bg'),
-    promoGenre = promoBG.querySelector('.promo__genre'),
-    interactiveItem = document.querySelectorAll('.promo__interactive-item'),
-    promoList = document.querySelector('.promo__interactive-list');
+        promoBG.style.backgroundImage = 'url("img/bg.jpg")';
+    }
+    
+    changeText(promoGenre);
+    
+    /*
+    function filmName(node) {
+        movieDB.movies.sort();
+        node.forEach((item, i) => {
+            item.innerHTML = `${i+1} ${movieDB.movies[i]}`;
+        });
+    }
+    filmName(interactiveItem);
+    */
+    
+    // addingBtn.addEventListener('click', () => {
+    //     if(addingInput.value != '') {
+    //         movieDB.movies += addingInput.value;
+    //         console.log(movieDB.movies);
+    //     }
+    // })
 
-function removeNode(node) {
-    node.forEach(item => {
-        item.remove();
-    });
-}
+    addFilmForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+    
+        let newFilm = addingInput.value;
+        const favoriteFilm = favFilm.checked;
 
-removeNode(imgPromoAdv);
+        if(newFilm) {
+            if(newFilm.length > 21) {
+                newFilm = newFilm.substring(1, 22) + '...';
+                console.log(newFilm);
+            }
+    
+            if(favoriteFilm === true) console.log("Добавляем любимый фильм");
+    
+            movieDB.movies.push(newFilm);
+            movieDB.movies.sort();
+    
+            createFilmList(movieDB, promoList);
+        }
+        
+    })
 
-function changeText(node) {
-    const text = 'драма';
-    node.textContent = text;
-}
+    function createFilmList(films, parent) {
+        parent.innerHTML = '';
+        movieDB.movies.sort();
 
-changeText(promoGenre);
+        films.movies.forEach((film, i) => {
+            parent.innerHTML += `
+            <li class="promo__interactive-item">${i+1} ${film}
+                <div class="delete"></div>
+            </li>`
+        });
 
-promoBG.style.backgroundImage = 'url("img/bg.jpg")';
+        delFilm.forEach((btn, i) => {
+            btn.addEventListener('click', () => {
+                btn.parentElement.remove();
+                movieDB.movies.splice(i, 1);
+                createFilmList(films, parent);
+    
+            })
+        });
+    }
+    createFilmList(movieDB, promoList);
 
-/*
-function filmName(node) {
-    movieDB.movies.sort();
-    node.forEach((item, i) => {
-        item.innerHTML = `${i+1} ${movieDB.movies[i]}`;
-    });
-}
-filmName(interactiveItem);
-*/
+    
+})
 
-promoList.innerHTML = '';
-movieDB.movies.sort();
-movieDB.movies.forEach((film, i) => {
-    promoList.innerHTML += `<li class="promo__interactive-item">${i+1} ${film}
-    <div class="delete"></div>
-</li>`
-});
+
