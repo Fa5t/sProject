@@ -91,5 +91,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimer('.timer', deadline);
 
+    //Modal
+
+    const modalWidow = document.querySelectorAll('[data-modal]'),
+          closeModalWidow = document.querySelector('[data-close]'),
+          modal = document.querySelector('.modal'),
+          closeModal = document.querySelector('[data-close]');
+    
+    function modalTrigger(modalWidow, modal) {
+        modalWidow.forEach(btn => {
+            btn.addEventListener('click', e => {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            })
+        })
+    }
+
+    function closingModal(closeModal, modal) {
+        closeModal.addEventListener('click', e => {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        })
+    }
+
+    modalTrigger(modalWidow, modal);
+    closingModal(closeModal, modal)
+    
 
 });
