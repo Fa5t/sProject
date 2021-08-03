@@ -108,11 +108,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function closingModal(closeModal, modal) {
-        closeModal.addEventListener('click', e => {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
+        closeModal.addEventListener('click ', e => {
+            if(e.target === closeModal || e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+            
         })
+
+
     }
+
+    function User(name, age) {
+        this.name = name;
+        this.age = age;
+        this.hello = () => {
+            console.log(`Привет - ${this.name}`);
+        }
+    }
+
+    const Stas = new User('Stas' , 23);
+    console.log(Stas);
+    Stas.hello();
 
     modalTrigger(modalWidow, modal);
     closingModal(closeModal, modal)
