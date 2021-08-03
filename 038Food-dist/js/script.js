@@ -119,18 +119,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    function User(name, age) {
-        this.name = name;
-        this.age = age;
-        this.hello = () => {
-            console.log(`Привет - ${this.name}`);
-        }
-    }
+    // function User(name, age) {
+    //     this.name = name;
+    //     this.age = age;
+    //     this.hello = () => {
+    //         console.log(`Привет - ${this.name}`);
+    //     }
+    // }
 
-    const Stas = new User('Stas' , 23);
-    console.log(Stas);
-    Stas.hello();
+    // const Stas = new User('Stas' , 23);
+    // console.log(Stas);
+    // Stas.hello();
 
+    //1)Обычная функция this = window,но если use strict - undefined
+    //2) Контекст у методов объекта - будет сам объект
+    //3) this в конструкторах и классах - новый экземпляр объекта
+    //4) Ручаня привязка this: call, apply, bind
+     //5) Стрелочная фукнция всегда ищет и обращается к родительскому элементу, а 
+     //function() самотстоятельная и не обращается.
+
+     class Rectangle {
+         constructor(width, height) {
+            this.width = width;
+            this.height = height;
+         }
+
+         rectArea() {
+             return this.height * this.width;
+         }
+     }
+
+     class ColoredRectangleWithText extends Rectangle {
+         constructor(width, height, text, color) {
+             super();
+             this.text = text;
+             this.color = color;
+         }
+
+         viewRect() {
+             console.log(this.height);
+         }
+     }
+
+    const rect = new Rectangle(10, 5);
+    console.log(rect.rectArea();); 
+    const newRect = new ColoredRectangleWithText();
+    newRect.viewRect();
     modalTrigger(modalWidow, modal);
     closingModal(closeModal, modal)
     
