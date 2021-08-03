@@ -138,33 +138,55 @@ document.addEventListener('DOMContentLoaded', () => {
      //5) Стрелочная фукнция всегда ищет и обращается к родительскому элементу, а 
      //function() самотстоятельная и не обращается.
 
-     class Rectangle {
-         constructor(width, height) {
-            this.width = width;
-            this.height = height;
+     class CardMenu {
+         constructor(src, alt, h3, text, price, transfer, parentSelector) {
+            this.src = src;
+            this.alt = alt;
+            this.h3 = h3;
+            this.text = text;
+            this.price = price;
+            this.transfer = transfer;
+            this.parent = document.querySelector(parentSelector);
+            this.convertDollarToGriv();
          }
 
-         rectArea() {
-             return this.height * this.width;
+         convertDollarToGriv() {
+            this.price = this.price * this.transfer;
+         }
+         addHTML() {
+             const elem = document.createElement('div');
+             elem.innerHTML = `
+                <div class="menu__item">
+                <img src="${this.src}" alt="${this.alt}">
+                <h3 class="menu__item-subtitle">${this.h3}"</h3>
+                <div class="menu__item-descr">${this.text}</div>
+                <div class="menu__item-divider"></div>
+                <div class="menu__item-price">
+                    <div class="menu__item-cost">Цена:</div>
+                    <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+                </div>
+            </div>`;
+            this.parent.append(elem);
          }
      }
+    
+    new CardMenu(
+        'img/tabs/vegy.jpg', 'vegy', 'Меню Фитнес', 
+        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+        10, 27, '.menu .container'
+    ).addHTML();
 
-     class ColoredRectangleWithText extends Rectangle {
-         constructor(width, height, text, color) {
-             super();
-             this.text = text;
-             this.color = color;
-         }
+    new CardMenu(
+        'img/tabs/elite.jpg', 'vegy', 'Меню “Премиум”', 
+        'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+        20, 27, '.menu .container'
+    ).addHTML();
 
-         viewRect() {
-             console.log(this.height);
-         }
-     }
-
-    const rect = new Rectangle(10, 5);
-    console.log(rect.rectArea();); 
-    const newRect = new ColoredRectangleWithText();
-    newRect.viewRect();
+    new CardMenu(
+        'img/tabs/post.jpg', 'vegy', 'Меню “Постное”', 
+        'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
+        15, 27, '.menu .container'
+    ).addHTML();
     modalTrigger(modalWidow, modal);
     closingModal(closeModal, modal)
     
